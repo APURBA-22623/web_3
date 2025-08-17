@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to VOX777 - Secure Authentication Solution</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="VOX777 - A secure, modern authentication system">
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4fd1ff;
+            --secondary-color: #7f5fff;
+            --accent-color: #00f2fe;
+            --bg-color: #101225;
+            --text-color: #e6e6fa;
+            --card-bg: #181a2b;
+            --border-color: #23263a;
+            --glow: 0 0 2px #4fd1ff, 0 0 4px #7f5fff;
+            --gradient-btn: linear-gradient(90deg, #4fd1ff 0%, #7f5fff 100%);
+            --gradient-btn-hover: linear-gradient(90deg, #7f5fff 0%, #4fd1ff 100%);
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .navbar {
+            background: #181a2b !important;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px #000a  ;
+        }
+        .navbar .navbar-brand, .navbar .nav-link {
+            color: #4fd1ff !important;
+            font-weight: 600;
+        }
+        .navbar .nav-link.btn-primary {
+            background: var(--gradient-btn);
+            color: #fff !important;
+            border-radius: 8px;
+            box-shadow: var(--glow);
+            border: none;
+            transition: background 0.3s;
+        }
+        .navbar .nav-link.btn-primary:hover {
+            background: var(--gradient-btn-hover);
+        }
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 7rem 1rem 3rem 1rem;
+        }
+        .animated-text {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 900;
+            color: #4fd1ff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 2px #4fd1ff, 0 0 4px #7f5fff;
+            opacity: 0;
+            transform: translateX(-80px);
+            animation: slideGlowLeft 1.2s cubic-bezier(0.77,0,0.175,1) 0.2s forwards;
+        }
+        @keyframes slideGlowLeft {
+            from { opacity: 0; transform: translateX(-80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .glowing-line {
+            width: 350px;
+            height: 8px;
+            background: var(--gradient-btn);
+            margin: 2rem auto 2.5rem auto;
+            border-radius: 8px;
+            box-shadow: 0 0 2px #4fd1ff, 0 0 4px #7f5fff;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+        .tagline {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00f2fe;
+            letter-spacing: 1px;
+            text-shadow: 0 0 2px #00f2fe, 0 0 4px #7f5fff;
+            margin-bottom: 2rem;
+                opacity: 0;
+            transform: translateX(80px);
+            animation: slideGlowRight 1.2s cubic-bezier(0.77,0,0.175,1) 0.6s forwards;
+        }
+        @keyframes slideGlowRight {
+            from { opacity: 0; transform: translateX(80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .lead {
+            font-size: 1.1rem;
+            color: #e6e6fa;
+            margin-bottom: 2.5rem;
+                opacity: 0;
+            animation: fadeInUp 1.2s 1.2s forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn-3d {
+            background: var(--gradient-btn);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            box-shadow: var(--glow);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+        }
+        .btn-3d:hover {
+            background: var(--gradient-btn-hover);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 0 4px #7f5fff, 0 0 2px #4fd1ff;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 2px 12px #000a;
+            transition: box-shadow 0.3s, transform 0.3s;
+            padding: 2rem 1.5rem;
+        }
+        .feature-card:hover {
+            box-shadow: 0 8px 32px #4fd1ff33;
+            transform: translateY(-6px) scale(1.03);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #4fd1ff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 1px #4fd1ff, 0 0 2px #7f5fff;
+        }
+        .feature-card h3 {
+            color: #7f5fff;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 1px #7f5fff;
+        }
+        .feature-card p {
+            color: #e6e6fa;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 2px 12px #000a;
+            padding: 2rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00f2fe;
+            text-shadow: 0 0 2px #00f2fe, 0 0 4px #7f5fff;
+        }
+        .stat-card .lead {
+            color: #e6e6fa;
+        }
+        .cta-section {
+            background: #181a2b;
+            color: #fff;
+            border-radius: 24px;
+            margin: 3rem 0;
+            box-shadow: 0 4px 24px #000a;
+        }
+        .cta-section h2, .cta-section .lead {
+            color: #fff;
+        }
+        .footer {
+            background: #181a2b;
+            color: #e6e6fa;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer .gradient-text {
+            background: var(--gradient-btn);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .footer-link {
+            color: #4fd1ff;
+            text-decoration: none;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        .social-icon {
+            width: 36px; height: 36px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--gradient-btn);
+            color: #fff;
+            border-radius: 50%;
+            margin-right: 8px;
+            font-size: 1.2rem;
+            box-shadow: 0 0 1px #4fd1ff, 0 0 2px #7f5fff;
+            transition: background 0.2s;
+        }
+        .social-icon:hover {
+            background: var(--gradient-btn-hover);
+        }
+        @media (max-width: 767px) {
+            .hero-content { padding: 4rem 0.5rem 2rem 0.5rem; }
+            .feature-card, .stat-card { padding: 1.2rem 0.7rem; }
+            .glowing-line { width: 90vw; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html#">
+                <img src="logo.png" alt="VOX777 Logo" style="height:36px;"> VOX777
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#stats">Stats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Sign In</a></li>
+                    <li class="nav-item"><a class="nav-link btn-primary" href="register.html">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="hero-section" id="home">
+        <canvas class="hero-grid-bg" id="heroGridCanvas"></canvas>
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-12 hero-content" data-aos="fade-up">
+                    <h1 class="animated-text mb-4">VOX777</h1>
+                    <div class="glowing-line"></div>
+                    <div class="tagline">Elevating Security Standards</div>
+                    <p class="lead">
+                        Experience state-of-the-art authentication with our modern security system. 
+                        Built for developers, trusted by businesses worldwide.
+                    </p>
+                    <div class="d-flex gap-4 justify-content-center" data-aos="fade-up" data-aos-delay="400">
+                        <a href="register.html" class="btn btn-primary btn-lg px-5 py-3 btn-3d">Get Started</a>
+                        <a href="login.html" class="btn btn-outline-primary btn-lg px-5 py-3 btn-3d">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="py-5" id="features">
+        <div class="container">
+            <h2 class="text-center mb-5 gradient-text" data-aos="fade-up">Why Choose VOX777?</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card h-100">
+                        <div class="text-center">
+                                <i class="fas fa-shield-alt feature-icon"></i>
+                            <h3>Secure by Design</h3>
+                            <p>Industry-standard encryption and security practices to keep your data safe.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card h-100">
+                        <div class="text-center">
+                                <i class="fas fa-bolt feature-icon"></i>
+                            <h3>Lightning Fast</h3>
+                            <p>Optimized performance for quick authentication and seamless user experience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card h-100">
+                        <div class="text-center">
+                                <i class="fas fa-code feature-icon"></i>
+                            <h3>Developer Friendly</h3>
+                            <p>Easy integration with comprehensive documentation and API support.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="stats-section py-5" id="stats">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4 mb-md-0" data-aos="fade-up">
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="99.9">0</div>
+                        <p class="lead">Uptime %</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="10000">0</div>
+                        <p class="lead">Users Protected</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <p class="lead">Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cta-section animated-bg py-5">
+        <div class="container text-center" data-aos="zoom-in">
+            <h2 class="mb-4 gradient-text">Ready to Get Started?</h2>
+            <p class="lead mb-4">Join thousands of developers who trust VOX777 for their authentication needs.</p>
+            <a href="register.html" class="btn btn-primary btn-lg px-5 btn-3d">Create Account</a>
+        </div>
+    </section>
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-3 gradient-text">VOX777</h5>
+                    <p>Secure, reliable authentication for modern applications.</p>
+                    <div class="social-icons d-flex gap-2">
+                        <a href="index.html#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="index.html#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="index.html#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-3 gradient-text">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="login.html" class="footer-link">Login</a></li>
+                        <li><a href="register.html" class="footer-link">Register</a></li>
+                        <li><a href="index.html#features" class="footer-link">Features</a></li>
+                        <li><a href="index.html#stats" class="footer-link">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-3 gradient-text">Contact</h5>
+                    <p>
+                        <i class="fas fa-envelope me-2"></i> support@authsite.com<br>
+                        <i class="fas fa-phone me-2"></i> (555) 123-4567<br>
+                        <i class="fas fa-map-marker-alt me-2"></i> 123 Security Ave, Cyber City
+                    </p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; <span id="year"></span> VOX777. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        // Animate statistics numbers
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            const finalValue = parseFloat(stat.getAttribute('data-count'));
+            if (!isNaN(finalValue)) {
+                let currentValue = 0;
+                const increment = finalValue / 50;
+                const duration = 2000;
+                const interval = duration / 50;
+                const counter = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= finalValue) {
+                        stat.textContent = finalValue.toLocaleString();
+                        clearInterval(counter);
+                    } else {
+                        stat.textContent = Math.floor(currentValue).toLocaleString();
+                    }
+                }, interval);
+            }
+        });
+    </script>
+    <script>
+        // Hero grid parallax effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('heroGridCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width = window.innerWidth;
+            let height = document.querySelector('.hero-section').offsetHeight;
+            let mouseX = width / 2;
+            let mouseY = height / 2;
+            const gridSize = 40;
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = document.querySelector('.hero-section').offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            function drawGrid() {
+                ctx.clearRect(0, 0, width, height);
+                // Calculate parallax offset
+                const offsetX = ((mouseX / width) - 0.5) * 20;
+                const offsetY = ((mouseY / height) - 0.5) * 20;
+                ctx.strokeStyle = '#23263a';
+                ctx.lineWidth = 1;
+                // Vertical lines
+                for (let x = -gridSize; x < width + gridSize; x += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(x + offsetX, 0);
+                    ctx.lineTo(x + offsetX, height);
+                    ctx.stroke();
+                }
+                // Horizontal lines
+                for (let y = -gridSize; y < height + gridSize; y += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y + offsetY);
+                    ctx.lineTo(width, y + offsetY);
+                    ctx.stroke();
+                }
+            }
+            function animate() {
+                drawGrid();
+                requestAnimationFrame(animate);
+            }
+            window.addEventListener('resize', resizeCanvas);
+            document.querySelector('.hero-section').addEventListener('mousemove', function(e) {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+            });
+            resizeCanvas();
+            animate();
+        });
+    </script>
+</body>
+</html>

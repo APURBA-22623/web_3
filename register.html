@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - VOX777</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #4fd1ff;
+            --secondary-color: #7f5fff;
+            --accent-color: #00f2fe;
+            --bg-color: #101225;
+            --text-color: #e6e6fa;
+            --card-bg: #181a2b;
+            --border-color: #23263a;
+            --glow: 0 0 2px #4fd1ff, 0 0 4px #7f5fff;
+            --gradient-btn: linear-gradient(90deg, #4fd1ff 0%, #7f5fff 100%);
+            --gradient-btn-hover: linear-gradient(90deg, #7f5fff 0%, #4fd1ff 100%);
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass-morphism {
+            background: var(--card-bg);
+            box-shadow: 0 2px 24px 0 #4fd1ff33;
+            border-radius: 0 !important;
+            padding: 1.2rem 1rem;
+            max-width: 320px;
+            margin: 3rem auto 0 auto;
+        }
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+        .input-field.with-icon {
+            padding-left: 2.2rem !important;
+            padding-right: 2.2rem !important;
+            background: #15172b;
+            color: #e6e6fa;
+            border: 1px solid var(--border-color);
+            border-radius: 0 !important;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            height: 2.4rem;
+            line-height: 2.4rem;
+            display: flex;
+            align-items: center;
+        }
+        .input-icon {
+            position: absolute;
+            left: 0.7rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4fd1ff;
+            font-size: 1.1rem;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .show-password-btn {
+            position: absolute;
+            right: 0.7rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #bfc7e0;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1.1rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .show-password-btn:focus {
+            outline: none;
+            color: #4fd1ff;
+        }
+        button[type="submit"] {
+            background: var(--gradient-btn);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            font-size: 1rem;
+            border-radius: 0 !important;
+            box-shadow: 0 0 12px 0 #4fd1ff44;
+            padding: 0.7rem 1rem;
+            margin-top: 0.5rem;
+            width: 100%;
+            transition: background 0.3s, box-shadow 0.2s, transform 0.2s;
+        }
+        button[type="submit"]:hover {
+            background: var(--gradient-btn-hover);
+            box-shadow: 0 0 8px #7f5fff, 0 0 2px #4fd1ff;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .login-link {
+            display: block;
+            margin-top: 1.5rem;
+            color: #00ccff;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: underline;
+            font-size: 1rem;
+            letter-spacing: 0.01em;
+            transition: color 0.2s;
+        }
+        .login-link:hover {
+            color: #0066ff;
+        }
+        label {
+            color: #e6e6fa;
+            font-size: 0.97rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            display: block;
+            letter-spacing: 0.01em;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+    function togglePassword() {
+        const passwordField = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.className = 'fas fa-eye-slash text-sm';
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.className = 'fas fa-eye text-sm';
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="glass-morphism rounded-2xl p-8 max-w-md w-full mx-4">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-white mb-2">Create Account</h1>
+            <p class="text-gray-300">Sign up for VOX777</p>
+        </div>
+                        <form method="post" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-2">Username</label>
+                <div class="input-group">
+                    <i class="fas fa-user input-icon"></i>
+                    <input name="username" required class="input-field with-icon" placeholder="Enter username">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-2">Email</label>
+                <div class="input-group">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" name="email" required class="input-field with-icon" placeholder="Enter email">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-2">Password</label>
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" name="password" id="password" required class="input-field with-icon" placeholder="Enter password">
+                    <button type="button" onclick="togglePassword()" class="show-password-btn" tabindex="-1">
+                        <i class="fas fa-eye text-sm" id="toggleIcon"></i>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="w-full py-3 font-semibold">Create Account</button>
+        </form>
+        <div class="mt-6 text-center">
+            <a href="login.html" class="login-link">Already have an account? Log in</a>
+            <div style="margin-top:0.75rem;">
+                <a href="index.html" class="login-link">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

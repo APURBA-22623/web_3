@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Professional Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49'
+                        },
+                        secondary: {
+                            50: '#fafafa',
+                            100: '#f4f4f5',
+                            200: '#e4e4e7',
+                            300: '#d4d4d8',
+                            400: '#a1a1aa',
+                            500: '#71717a',
+                            600: '#52525b',
+                            700: '#3f3f46',
+                            800: '#27272a',
+                            900: '#18181b'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'elegant': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                        'soft': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 40px rgba(14, 165, 233, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4fd1ff;
+            --secondary-color: #7f5fff;
+            --accent-color: #00f2fe;
+            --bg-color: #101225;
+            --text-color: #e6e6fa;
+            --card-bg: #181a2b;
+            --border-color: #23263a;
+            --glow: 0 0 2px #4fd1ff, 0 0 4px #7f5fff;
+            --gradient-btn: linear-gradient(90deg, #4fd1ff 0%, #7f5fff 100%);
+            --gradient-btn-hover: linear-gradient(90deg, #7f5fff 0%, #4fd1ff 100%);
+        }
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+        .login-card {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 2px 12px #000a;
+            color: var(--text-color);
+            border-radius: 0 !important;
+            padding: 1.2rem 1rem;
+            max-width: 320px;
+            margin: 3rem auto 0 auto;
+            opacity: 0;
+            transform: translateX(-60px);
+            animation: slideInRight 0.8s cubic-bezier(0.77,0,0.175,1) forwards;
+        }
+        .login-title {
+            color: #4fd1ff;
+            font-weight: 700;
+            text-shadow: 0 0 2px #4fd1ff, 0 0 4px #7f5fff;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .btn-primary, .btn, button[type="submit"] {
+            background: var(--gradient-btn);
+            color: #fff !important;
+            border: none;
+            border-radius: 0 !important;
+            font-weight: 700;
+            box-shadow: var(--glow);
+            transition: background 0.3s, box-shadow 0.2s, transform 0.2s;
+        }
+        .btn-primary:hover, .btn:hover, button[type="submit"]:hover {
+            background: var(--gradient-btn-hover);
+            box-shadow: 0 0 4px #7f5fff, 0 0 2px #4fd1ff;
+            transform: translateY(-2px) scale(1.03);
+        }
+        input, select, textarea {
+            border-radius: 0 !important;
+            background: #181a2b;
+            color: #e6e6fa;
+            border: 1px solid var(--border-color);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 2px #4fd1ff;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .role-select-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+            margin-bottom: 1.2rem;
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 0 !important;
+            padding: 0.15rem 0.15rem;
+            width: 100%;
+            min-width: 0;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+        }
+        .role-btn {
+            background: none;
+            border: none;
+            color: #bfc7e0;
+            font-weight: 600;
+            font-size: 0.92rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            min-width: 0;
+            flex: 1 1 0;
+            width: 100%;
+            max-width: 140px;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 0 !important;
+            transition: color 0.2s, box-shadow 0.2s, background 0.2s, transform 0.2s;
+            outline: none;
+            position: relative;
+            box-sizing: border-box;
+            padding: 0;
+            border: none !important;
+        }
+        @media (max-width: 500px) {
+            .role-select-group {
+                gap: 0.1rem;
+                padding: 0.1rem;
+            }
+            .role-btn {
+                font-size: 0.85rem;
+                max-width: 100%;
+                min-width: 0;
+                flex: 1 1 0;
+                height: 38px;
+            }
+        }
+        .role-btn i {
+            font-size: 1.1rem !important;
+            margin-right: 0.4rem !important;
+            min-width: 18px;
+            text-align: center;
+        }
+        .role-btn span {
+            display: inline-block;
+            width: 100%;
+            text-align: left;
+        }
+        .role-btn.active, .role-btn:focus {
+            color: #4fd1ff;
+            background: #181a2b;
+            box-shadow: 0 0 8px #4fd1ff44;
+            border: none !important;
+            z-index: 1;
+            transform: scale(1.04);
+        }
+        .role-btn:not(.active):hover {
+            color: #7f5fff;
+            background: #23263a;
+        }
+        .role-btn::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4fd1ff 0%, #7f5fff 100%);
+            border-radius: 0;
+            opacity: 0;
+            transform: scaleX(0);
+            transition: opacity 0.2s, transform 0.3s cubic-bezier(0.77,0,0.175,1);
+        }
+        .role-btn.active::after {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .input-field.with-icon {
+            padding-left: 2.2rem !important;
+            padding-right: 2.2rem !important;
+        }
+        .input-icon {
+            position: absolute;
+            left: 0.7rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4fd1ff;
+            font-size: 1rem;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .show-password-btn {
+            position: absolute;
+            right: 0.7rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #bfc7e0;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1.1rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .show-password-btn:focus {
+            outline: none;
+            color: #4fd1ff;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative">
+    <!-- Rules and Regulations Modal -->
+    <div id="rulesModal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(16,18,37,0.95);z-index:1000;display:flex;align-items:center;justify-content:center;">
+        <div style="background:#23263a;padding:2rem 2.5rem;border-radius:1rem;max-width:95vw;width:400px;box-shadow:0 8px 32px #000a;">
+            <h2 style="color:#4fd1ff;font-size:1.5rem;font-weight:700;margin-bottom:1rem;text-align:center;">Rules & Regulations</h2>
+            <ul style="color:#e6e6fa;font-size:1rem;line-height:1.6;margin-bottom:1.5rem;list-style:disc inside;">
+                <li>Do not share your credentials with anyone.</li>
+                <li>Respect all users and administrators.</li>
+                <li>Unauthorized access is strictly prohibited.</li>
+                <li>Any suspicious activity will result in a ban.</li>
+                <li>Follow all terms of service and privacy policies.</li>
+            </ul>
+            <button onclick="closeRulesModal()" style="background:linear-gradient(90deg,#4fd1ff 0%,#7f5fff 100%);color:#fff;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:0.5rem;box-shadow:0 0 8px #4fd1ff44;cursor:pointer;width:100%;">I Agree</button>
+        </div>
+    </div>
+    <!-- Floating Orbs Background -->
+    <div class="floating-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+
+    <!-- Main Login Container -->
+    <div class="glass-morphism rounded-3xl shadow-elegant p-8 w-full max-w-md relative z-10 fade-in">
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <div class="bg-gradient-to-br from-primary-400 to-primary-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-glow logo-pulse">
+                <i class="fas fa-shield-alt text-white text-3xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-white mb-2 tracking-tight">Welcome Back</h1>
+            <p class="text-white/70 text-sm font-medium">Please sign in to your account</p>
+        </div>
+
+        <!-- Error Message -->
+        
+        <!-- Login Type Tabs -->
+        <div class="mb-6">
+            <div class="role-select-group">
+                <button 
+                    type="button" 
+                    class="role-btn active"
+                    onclick="switchTab('admin')"
+                    id="admin-tab"
+                >
+                    <i class="fas fa-user-shield mr-2"></i>
+                    Admin
+                </button>
+                <button 
+                    type="button" 
+                    class="role-btn"
+                    onclick="switchTab('app_user')"
+                    id="app_user-tab"
+                >
+                    <i class="fas fa-mobile-alt mr-2"></i>
+                    App User
+                </button>
+                <button 
+                    type="button" 
+                    class="role-btn"
+                    onclick="switchTab('reseller')"
+                    id="reseller-tab"
+                >
+                    <i class="fas fa-store mr-2"></i>
+                    Reseller
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <form method="post" class="space-y-6" id="loginForm">
+            <input type="hidden" name="login_type" id="login_type" value="admin">
+            
+            <!-- Username Field -->
+            <div class="space-y-2">
+                <label class="block text-white/90 text-sm font-semibold tracking-wide">
+                    Username
+                </label>
+                <div class="input-group">
+                    <i class="fas fa-user input-icon"></i>
+                    <input 
+                        name="username" 
+                        type="text"
+                        placeholder="Enter your username" 
+                        required 
+                        value=""
+                        class="input-field with-icon w-full py-4 pr-4 text-white placeholder-white/50 rounded-xl focus:outline-none font-medium"
+                        id="username"
+                    >
+                </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="space-y-2">
+                <label class="block text-white/90 text-sm font-semibold tracking-wide">
+                    Password
+                </label>
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input 
+                        name="password" 
+                        type="password" 
+                        id="password"
+                        placeholder="Enter your password" 
+                        required 
+                        class="input-field with-icon w-full py-4 pr-12 text-white placeholder-white/50 rounded-xl focus:outline-none font-medium"
+                    >
+                    <button 
+                        type="button" 
+                        onclick="togglePassword()"
+                        class="show-password-btn"
+                        tabindex="-1"
+                    >
+                        <i class="fas fa-eye text-sm" id="toggleIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- App ID Field -->
+            <div id="appIdField" class="space-y-2" style="display: none;">
+                <label class="block text-white/90 text-sm font-semibold tracking-wide">
+                    Application ID
+                </label>
+                <div class="input-group">
+                    <i class="fas fa-key input-icon"></i>
+                    <input 
+                        name="app_id" 
+                        type="text"
+                        placeholder="Enter your App ID" 
+                        value=""
+                        class="input-field with-icon w-full py-4 pr-4 text-white placeholder-white/50 rounded-xl focus:outline-none font-medium"
+                        id="app_id"
+                    >
+                </div>
+            </div>
+
+            <!-- Login Button -->
+            <button 
+                type="button"
+                class="btn-primary w-full py-4 px-6 text-white font-semibold rounded-xl focus:outline-none focus:ring-4 focus:ring-primary-400/30 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+                id="loginButton"
+            >
+                <span id="buttonText">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Sign In
+                </span>
+            </button>
+        </form>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center">
+            <p class="text-white/70 text-sm mb-3">
+                Don't have an account?
+                <a href="register.html" class="underline text-white">Create one</a>
+            </p>
+            <p class="text-white/70 text-sm mb-6">
+                <a href="index.html" class="underline text-white">Back to Home</a>
+            </p>
+            <p class="text-white/60 text-sm">
+                VOX777 - Admin Access Only
+            </p>
+        </div>
+    </div>
+
+    <!-- Captcha Modal -->
+    <div id="captchaModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(16,18,37,0.95);z-index:2000;align-items:center;justify-content:center;">
+        <div style="background:#23263a;padding:2rem 2.5rem;border-radius:1rem;max-width:95vw;width:350px;box-shadow:0 8px 32px #000a;display:flex;flex-direction:column;align-items:center;">
+            <h2 style="color:#4fd1ff;font-size:1.3rem;font-weight:700;margin-bottom:1.2rem;text-align:center;">Verify you are human</h2>
+            <div style="background:#fff;padding:1.2rem 1rem;border-radius:0.7rem;display:flex;align-items:center;gap:1rem;box-shadow:0 2px 8px #0002;margin-bottom:1.2rem;">
+                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="captcha" style="width:38px;height:38px;" />
+                <div style="display:flex;flex-direction:column;align-items:flex-start;">
+                    <label style="color:#222;font-size:1rem;font-weight:500;margin-bottom:0.5rem;">I'm not a robot</label>
+                    <div style="display:flex;align-items:center;gap:0.5rem;">
+                        <input type="checkbox" id="realisticCaptcha" style="width:1.2rem;height:1.2rem;accent-color:#4fd1ff;" />
+                        <span id="captchaSpinner" style="display:none;width:20px;height:20px;"><svg viewBox="0 0 50 50" style="width:20px;height:20px;"><circle cx="25" cy="25" r="20" fill="none" stroke="#4fd1ff" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.4 31.4" transform="rotate(-90 25 25)"><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/></circle></svg></span>
+                        <span id="captchaCheck" style="display:none;color:#22c55e;font-size:1.3rem;"><i class="fas fa-check-circle"></i></span>
+                    </div>
+                </div>
+            </div>
+            <button onclick="submitCaptcha()" id="captchaSubmitBtn" style="background:linear-gradient(90deg,#4fd1ff 0%,#7f5fff 100%);color:#fff;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:0.5rem;box-shadow:0 0 8px #4fd1ff44;cursor:pointer;width:100%;margin-bottom:0.5rem;" disabled>Verify</button>
+            <button onclick="closeCaptchaModal()" style="background:none;color:#aaa;font-size:0.95rem;border:none;margin-top:0.2rem;cursor:pointer;">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabType) {
+            document.getElementById('login_type').value = tabType;
+            
+            const appIdField = document.getElementById('appIdField');
+            const appIdInput = document.getElementById('app_id');
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.role-btn').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Add active class to selected tab
+            document.getElementById(tabType + '-tab').classList.add('active');
+            
+            if (tabType === 'app_user' || tabType === 'reseller') {
+                appIdField.style.display = 'block';
+                appIdField.style.opacity = '1';
+                appIdField.style.transform = 'translateY(0)';
+                appIdInput.required = true;
+            } else {
+                appIdField.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                appIdField.style.opacity = '0';
+                appIdField.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    appIdField.style.display = 'none';
+                    appIdInput.required = false;
+                }, 300);
+            }
+        }
+
+        // Password visibility toggle
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.className = 'fas fa-eye-slash text-sm';
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.className = 'fas fa-eye text-sm';
+            }
+        }
+
+        // Rules Modal Logic
+        function closeRulesModal() {
+            document.getElementById('rulesModal').style.display = 'none';
+        }
+        window.onload = function() {
+            document.getElementById('rulesModal').style.display = 'flex';
+        };
+
+        // Captcha Modal Logic
+        function openCaptchaModal() {
+            document.getElementById('captchaModal').style.display = 'flex';
+            // Reset captcha state
+            document.getElementById('realisticCaptcha').checked = false;
+            document.getElementById('captchaSpinner').style.display = 'none';
+            document.getElementById('captchaCheck').style.display = 'none';
+            document.getElementById('captchaSubmitBtn').disabled = true;
+        }
+        function closeCaptchaModal() {
+            document.getElementById('captchaModal').style.display = 'none';
+        }
+        function submitCaptcha() {
+            var captchaChecked = document.getElementById('realisticCaptcha').checked;
+            if (!captchaChecked) {
+                alert('Please check the captcha box to continue.');
+                return;
+            }
+            closeCaptchaModal();
+            // Actually submit the form
+            document.getElementById('loginForm').submit();
+        }
+        document.getElementById('realisticCaptcha').addEventListener('change', function() {
+            var spinner = document.getElementById('captchaSpinner');
+            var check = document.getElementById('captchaCheck');
+            var btn = document.getElementById('captchaSubmitBtn');
+            if (this.checked) {
+                spinner.style.display = 'inline-block';
+                check.style.display = 'none';
+                btn.disabled = true;
+                setTimeout(function() {
+                    spinner.style.display = 'none';
+                    check.style.display = 'inline-block';
+                    btn.disabled = false;
+                }, 3000);
+            } else {
+                spinner.style.display = 'none';
+                check.style.display = 'none';
+                btn.disabled = true;
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial tab state based on POST data
+            const initialTab = 'admin';
+            switchTab(initialTab);
+            
+            // Auto-focus username field
+            setTimeout(() => {
+                document.getElementById('username').focus();
+            }, 300);
+            
+            // Form submission handler
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                const button = document.getElementById('loginButton');
+                const buttonText = document.getElementById('buttonText');
+                
+                // Disable button and show loading state
+                button.disabled = true;
+                button.classList.add('opacity-75');
+                buttonText.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing In...';
+                
+                // Add subtle loading animation
+                button.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 150);
+
+                // Check fake captcha
+                if (document.getElementById('captchaModal').style.display === 'flex') {
+                    e.preventDefault();
+                    alert('Please verify the captcha to continue.');
+                    button.disabled = false;
+                    buttonText.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>Sign In';
+                    return false;
+                }
+            });
+            
+            // Enhanced input interactions
+            document.querySelectorAll('.input-field').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('scale-102');
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('scale-102');
+                });
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Alt + 1 for Admin tab
+                if (e.altKey && e.key === '1') {
+                    e.preventDefault();
+                    switchTab('admin');
+                }
+                // Alt + 2 for App User tab
+                if (e.altKey && e.key === '2') {
+                    e.preventDefault();
+                    switchTab('app_user');
+                }
+            });
+
+            // Role button animation/active state
+            const roleBtns = document.querySelectorAll('.role-btn');
+            roleBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    roleBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Intercept login button
+            document.getElementById('loginButton').addEventListener('click', function(e) {
+                openCaptchaModal();
+            });
+            // Prevent form submit by Enter key until captcha is solved
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                if (document.getElementById('captchaModal').style.display === 'flex') {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Add smooth transitions for better UX
+        const style = document.createElement('style');
+        style.textContent = `
+            .scale-102 {
+                transform: scale(1.02);
+            }
+            
+            .input-group {
+                transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Prefill username and password from localStorage if available
+        window.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('savedUsername')) {
+                document.getElementById('username').value = localStorage.getItem('savedUsername');
+            }
+            if (localStorage.getItem('savedPassword')) {
+                document.getElementById('password').value = localStorage.getItem('savedPassword');
+            }
+        });
+        // Save username and password to localStorage after successful login
+        function saveLoginToLocalStorage() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            localStorage.setItem('savedUsername', username);
+            localStorage.setItem('savedPassword', password);
+        }
+        // Attach to form submit (after captcha)
+        document.addEventListener('DOMContentLoaded', function() {
+            var loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function() {
+                    saveLoginToLocalStorage();
+                });
+            }
+        });
+    </script></body>
+    </html>
+
+
